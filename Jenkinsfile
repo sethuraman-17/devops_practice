@@ -3,27 +3,21 @@ pipeline {
 
     stages {
 
-        stage('Clone Info') {
+        stage('Clone') {
             steps {
-                bat 'echo Cloning Repository'
+                bat 'echo Cloning Source Code'
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                bat 'echo Building Application'
+                bat 'docker build -t sethu17/my-nginx-app:v1 .'
             }
         }
 
-        stage('Test') {
+        stage('Push Docker Image') {
             steps {
-                bat 'echo Running Tests'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                bat 'echo Deploying Application'
+                bat 'docker push sethu17/my-nginx-app:v1'
             }
         }
     }
